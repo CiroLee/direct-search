@@ -7,7 +7,7 @@ interface ISearchEngine {
 export const searchEngineMap: ISearchEngine[] = [
   {
     name: 'baidu',
-    abbr: ['b'],
+    abbr: ['b', 'ba'],
     type: 'engine',
     searchUrl: 'https://baidu.com/s?wd=',
   },
@@ -16,6 +16,12 @@ export const searchEngineMap: ISearchEngine[] = [
     abbr: ['go'],
     type: 'engine',
     searchUrl: 'https://google.com/search?q=',
+  },
+  {
+    name: 'being',
+    abbr: ['be'],
+    type: 'engine',
+    searchUrl: 'https://www.bing.com/search?q=',
   },
   {
     name: 'github',
@@ -28,6 +34,12 @@ export const searchEngineMap: ISearchEngine[] = [
     abbr: ['st'],
     type: 'website',
     searchUrl: 'https://stackoverflow.com/search?q=',
+  },
+  {
+    name: 'npm',
+    abbr: ['n'],
+    type: 'website',
+    searchUrl: 'https://www.npmjs.com/search?q=',
   },
   {
     name: 'juejin',

@@ -1,7 +1,7 @@
 <template>
   <div class="direct-search">
     <div class="direct-search__header">
-      <a href="https://github.com/CiroLee" target="_blank">
+      <a href="https://github.com/CiroLee/direct-search" target="_blank">
         <i class="ri-github-fill"></i>
         <span>Github</span>
       </a>
@@ -162,6 +162,9 @@ li {
     &.google {
       background-image: url('./assets/img/icons/google-icon.svg');
     }
+    &.being {
+      background-image: url('./assets/img/icons/being-icon.svg');
+    }
     &.github {
       background-image: url('./assets/img/icons/github-icon.svg');
     }
@@ -179,6 +182,9 @@ li {
     }
     &.segmentfault {
       background-image: url('./assets/img/icons/segmentfault-icon.svg');
+    }
+    &.npm {
+      background-image: url('./assets/img/icons/npm-icon.svg');
     }
   }
   &--clear {

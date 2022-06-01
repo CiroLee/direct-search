@@ -1,5 +1,7 @@
 # direct_search
 
+> 通过简单的命令直接到达搜索结果页面的工具。原理很简单，识别输入参数，调用对应的搜索引擎。
+
 ## 开发
 
 ```
@@ -12,12 +14,29 @@ npm run dev
 npm run build
 ```
 
-## 技术栈
+## 使用方法
 
-| 名称       | 描述                | 链接                            |
-| ---------- | ------------------- | ------------------------------- |
-| Vue3       | javascript 框架     | https://v3.cn.vuejs.org/        |
-| Vue-router | vue 路由管理        | https://router.vuejs.org/zh/    |
-| pinia      | 下一代 vue 状态管理 | https://pinia.vuejs.org/        |
-| typescript | javascript 扩展     | https://www.typescriptlang.org/ |
-| Vite       | 前端构建工具        | https://cn.vitejs.dev/          |
+```javascript
+搜索引擎/全称 搜索
+
+// e.g.    
+go 前端框架  // 新开标签，使用谷歌搜索 前端框架
+
+
+// 已支持的搜索引擎：
+
+baidu            b | ba
+google           go
+being            be
+github           gi
+stackoverflow    st
+npm              n
+juejin           j | jue
+zhihu            z | zhi
+csdn             c | cs
+segmentfault     se | sf
+```
+
+
+
+体验地址： ([搜索直达](https://ciro.club/search/))
