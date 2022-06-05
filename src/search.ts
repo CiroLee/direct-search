@@ -1,5 +1,6 @@
 interface ISearchEngine {
   name: string;
+  cname?: string;
   abbr: string[];
   type: 'engine' | 'website';
   searchUrl: string;
@@ -7,18 +8,28 @@ interface ISearchEngine {
 export const searchEngineMap: ISearchEngine[] = [
   {
     name: 'baidu',
+    cname: '百度',
     abbr: ['b', 'ba'],
     type: 'engine',
     searchUrl: 'https://baidu.com/s?wd=',
   },
   {
+    name: 'baidukaifa',
+    cname: '百度开发搜索',
+    abbr: ['bk'],
+    type: 'engine',
+    searchUrl: 'https://kaifa.baidu.com/searchPage?wd=',
+  },
+  {
     name: 'google',
+    cname: '谷歌',
     abbr: ['go'],
     type: 'engine',
     searchUrl: 'https://google.com/search?q=',
   },
   {
-    name: 'being',
+    name: 'Being',
+    cname: '必应',
     abbr: ['be'],
     type: 'engine',
     searchUrl: 'https://www.bing.com/search?q=',
@@ -42,13 +53,21 @@ export const searchEngineMap: ISearchEngine[] = [
     searchUrl: 'https://www.npmjs.com/search?q=',
   },
   {
+    name: 'caniuse',
+    abbr: ['c', 'ciu'],
+    type: 'website',
+    searchUrl: 'https://caniuse.com/?search=',
+  },
+  {
     name: 'juejin',
+    cname: '掘金',
     abbr: ['j', 'jue'],
     type: 'website',
     searchUrl: 'https://juejin.cn/search?query=',
   },
   {
     name: 'zhihu',
+    cname: '知乎',
     abbr: ['z', 'zhi'],
     type: 'website',
     searchUrl: 'https://www.zhihu.com/search?type=content&q=',
@@ -61,6 +80,7 @@ export const searchEngineMap: ISearchEngine[] = [
   },
   {
     name: 'segmentfault',
+    cname: '思否',
     abbr: ['se', 'sf'],
     type: 'website',
     searchUrl: 'https://segmentfault.com/search?q=',

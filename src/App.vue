@@ -22,8 +22,8 @@
         <p>e.g. go vue和react</p>
         <p>已支持的搜索引擎:</p>
         <ul>
-          <li v-for="item in searchEngineMap" :key="item.name">
-            <span>{{ item.name }}</span>
+          <li v-for="item in sortedSearchEngineMap" :key="item.name">
+            <span>{{ item.name }}{{ item?.cname ? `(${item.cname})` : '' }}</span>
             <span>{{ item.abbr.join(' | ') }}</span>
           </li>
         </ul>
@@ -41,7 +41,18 @@ const searchUrl = ref('https://baidu.com/s?wd=');
 const query = ref('');
 const showModal = ref(false);
 const searchBtnDisabled = computed(() => !query.value.length);
-
+const sortedSearchEngineMap = computed(() =>
+  searchEngineMap.sort((a, b) => {
+    const aVal = a.name.toLowerCase();
+    const bVal = b.name.toLowerCase();
+    if (aVal > bVal) {
+      return 1;
+    } else if (aVal < bVal) {
+      return -1;
+    }
+    return 0;
+  })
+);
 const handleInput = () => {
   const engineAbbr = getEngineSymbol(inputVal.value);
   const engine = getEngineObj(engineAbbr);
@@ -185,6 +196,12 @@ li {
     }
     &.npm {
       background-image: url('./assets/img/icons/npm-icon.svg');
+    }
+    &.caniuse {
+      background-image: url('./assets/img/icons/caniuse-icon.svg');
+    }
+    &.baidukaifa {
+      background-image: url('./assets/img/icons/baidukaifa-icon.svg');
     }
   }
   &--clear {
