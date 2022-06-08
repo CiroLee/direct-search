@@ -15,11 +15,11 @@
       "eslint --config .eslintrc.js"
     ],
     "*.{vue,css,sass,scss}": [
-      "stylelint --fix",
-      "git add"
+      "stylelint --fix"
     ]
   },
   "dependencies": {
+    "remixicon": "^2.5.0",
     "reset-css": "^5.0.1",
     "vfonts": "^0.0.3",
     "vue": "^3.2.36"

@@ -19,7 +19,10 @@
       <h4 class="direct-search__modal--title">使用方法</h4>
       <div class="direct-search__modal--content">
         <p>[引擎标识缩写/英文全称] [搜索词]</p>
-        <p>e.g. go vue和react</p>
+        <p>
+          <span>e.g. go vue和react</span>
+          <span class="gray indent-2"> // 打开新tab, 实用google搜索 vue和react</span>
+        </p>
         <p>已支持的搜索引擎:</p>
         <ul>
           <li v-for="item in sortedSearchEngineMap" :key="item.name">
@@ -297,5 +300,14 @@ li {
       }
     }
   }
+}
+
+.indent-2 {
+  display: inline-block;
+  text-indent: 1em;
+}
+
+.gray {
+  color: gray;
 }
 </style>

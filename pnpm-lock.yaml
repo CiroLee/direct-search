@@ -18,6 +18,7 @@ specifiers:
   postcss: ^8.4.14
   postcss-html: ^1.4.1
   prettier: ^2.6.2
+  remixicon: ^2.5.0
   reset-css: ^5.0.1
   sass: ^1.52.1
   stylelint: ^14.8.5
@@ -32,6 +33,7 @@ specifiers:
   vue-tsc: ^0.31.4
 
 dependencies:
+  remixicon: 2.5.0
   reset-css: 5.0.1
   vfonts: 0.0.3
   vue: 3.2.36
@@ -2836,6 +2838,10 @@ packages:
     resolution: {integrity: sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==}
     engines: {node: '>=8'}
     dev: true
+
+  /remixicon/2.5.0:
+    resolution: {integrity: sha512-q54ra2QutYDZpuSnFjmeagmEiN9IMo56/zz5dDNitzKD23oFRw77cWo4TsrAdmdkPiEn8mxlrTqxnkujDbEGww==}
+    dev: false
 
   /require-directory/2.1.1:
     resolution: {integrity: sha1-jGStX9MNqxyXbiNE/+f3kqam30I=}

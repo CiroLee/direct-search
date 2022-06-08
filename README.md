@@ -23,7 +23,7 @@ npm run build
 go 前端框架  // 新开标签，使用谷歌搜索 前端框架
 
 
-// 已支持的搜索引擎：
+// 已支持的搜索引擎(详见帮助dialog)
 
 baidu            b | ba
 google           go
