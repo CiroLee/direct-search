@@ -2,7 +2,7 @@ interface ISearchEngine {
   name: string;
   cname?: string;
   abbr: string[];
-  type: 'engine' | 'website';
+  type: 'engine' | 'website' | 'video';
   searchUrl: string;
 }
 export const searchEngineMap: ISearchEngine[] = [
@@ -84,6 +84,20 @@ export const searchEngineMap: ISearchEngine[] = [
     abbr: ['se', 'sf'],
     type: 'website',
     searchUrl: 'https://segmentfault.com/search?q=',
+  },
+  {
+    name: 'youtube',
+    cname: '油管',
+    abbr: ['yt'],
+    type: 'video',
+    searchUrl: 'https://www.youtube.com/results?search_query=v',
+  },
+  {
+    name: 'bilibili',
+    cname: '哔哩哔哩',
+    abbr: ['bi'],
+    type: 'video',
+    searchUrl: 'https://search.bilibili.com/all?keyword=',
   },
 ];
 

@@ -15,8 +15,10 @@
       <button class="icon direct-search__input--btn" :disabled="searchBtnDisabled" @click="handleSearch"></button>
     </div>
     <div v-if="showModal" class="direct-search__modal">
-      <i class="ri-close-fill direct-search__modal--close" @click="toggleModal(false)"></i>
-      <h4 class="direct-search__modal--title">使用方法</h4>
+      <div class="direct-search__modal--header">
+        <i class="ri-close-fill direct-search__modal--close" @click="toggleModal(false)"></i>
+        <h4 class="direct-search__modal--title">使用方法</h4>
+      </div>
       <div class="direct-search__modal--content">
         <p>[引擎标识缩写/英文全称] [搜索词]</p>
         <p>
@@ -157,7 +159,7 @@ li {
 }
 
 .direct-search__input {
-  width: 72%;
+  width: 52%;
   margin: 24px auto;
   position: relative;
   &--logo {
@@ -205,6 +207,12 @@ li {
     }
     &.baidukaifa {
       background-image: url('./assets/img/icons/baidukaifa-icon.svg');
+    }
+    &.youtube {
+      background-image: url('./assets/img/icons/youtube-fill.svg');
+    }
+    &.bilibili {
+      background-image: url('./assets/img/icons/bilibili-fill.svg');
     }
   }
   &--clear {
@@ -256,6 +264,12 @@ li {
   }
 }
 
+@media screen and (max-width: 414px) {
+  .direct-search__input {
+    width: 86%;
+  }
+}
+
 .direct-search__modal {
   width: 94%;
   max-width: 550px;
@@ -269,11 +283,14 @@ li {
   border: 1px solid rgb(1 23 66 / 10%);
   transform: translate(-50%, -50%);
   z-index: 100;
+  &--header {
+    position: absolute;
+    width: calc(100% - 64px);
+  }
   &--close {
     font-size: 18px;
     position: absolute;
-    top: 24px;
-    right: 32px;
+    right: 0;
     cursor: pointer;
     color: #b3afaf;
     &:hover {
@@ -284,19 +301,19 @@ li {
     font-size: 20px;
   }
   &--content {
-    margin-top: 20px;
+    margin-top: 44px;
     color: #333;
+    max-height: 60vh;
+    overflow: auto;
     ul,
     p {
       margin-top: 8px;
     }
     li {
-      padding-left: 12px;
+      padding: 0 24px 0 12px;
       display: flex;
-      justify-content: space-between;
-      width: 50%;
-      span {
-        text-align: right;
+      span:nth-of-type(1) {
+        flex: 2;
       }
     }
   }
