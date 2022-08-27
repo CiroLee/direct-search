@@ -38,7 +38,7 @@
 </template>
 <script lang="ts" setup>
 import { ref, onMounted, computed } from 'vue';
-import { getEngineObj, getEngineSymbol, getQuery, searchEngineMap } from './search';
+import { getEngineObj, getEngineSymbol, getQuery, searchEngineMap, isChineseContained } from './search';
 const inputRef = ref<HTMLInputElement | null>(null);
 const inputVal = ref('');
 const engineName = ref('baidu');
@@ -72,7 +72,15 @@ const handleInput = () => {
 };
 
 const handleSearch = () => {
-  query.value && window.open(`${searchUrl.value}${query.value}`, '_blank');
+  if (engineName.value === 'google-translate') {
+    const isAllEnligsh = !isChineseContained(query.value);
+    console.log(isAllEnligsh);
+
+    const transQuery = isAllEnligsh ? `en&tl=zh-CN&text=${query.value}` : `zh-CN&tl=en&text=${query.value}`;
+    return transQuery && window.open(`${searchUrl.value}${transQuery}`, '_blank');
+  }
+
+  return query.value && window.open(`${searchUrl.value}${query.value}`, '_blank');
 };
 
 const handleClearInput = () => {
@@ -213,6 +221,9 @@ li {
     }
     &.bilibili {
       background-image: url('./assets/img/icons/bilibili-fill.svg');
+    }
+    &.google-translate {
+      background-image: url('./assets/img/icons/google-translate-icon.svg');
     }
   }
   &--clear {

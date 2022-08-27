@@ -99,6 +99,13 @@ export const searchEngineMap: ISearchEngine[] = [
     type: 'video',
     searchUrl: 'https://search.bilibili.com/all?keyword=',
   },
+  {
+    name: 'google-translate',
+    cname: 'google翻译',
+    abbr: ['gf'],
+    type: 'website',
+    searchUrl: 'https://translate.google.cn/?sl=',
+  },
 ];
 
 export const getEngineSymbol = (str: string): string => {
@@ -113,3 +120,5 @@ export const getEngineObj = (abbr: string): ISearchEngine | undefined => {
 export const getQuery = (str: string, abbr: string): string => {
   return str.substring(abbr.length).trim().replace(/\s+/g, '+');
 };
+
+export const isChineseContained = (str: string) => /[\u4E00-\u9FA5]+/.test(str);
