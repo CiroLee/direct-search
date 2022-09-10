@@ -106,6 +106,13 @@ export const searchEngineMap: ISearchEngine[] = [
     type: 'website',
     searchUrl: 'https://translate.google.cn/?sl=',
   },
+  {
+    name: 'deepl-translate',
+    type: 'website',
+    cname: 'deepl',
+    abbr: ['dl'],
+    searchUrl: 'https://www.deepl.com/translator#',
+  },
 ];
 
 export const getEngineSymbol = (str: string): string => {

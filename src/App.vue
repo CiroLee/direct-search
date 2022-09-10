@@ -74,9 +74,11 @@ const handleInput = () => {
 const handleSearch = () => {
   if (engineName.value === 'google-translate') {
     const isAllEnligsh = !isChineseContained(query.value);
-    console.log(isAllEnligsh);
-
     const transQuery = isAllEnligsh ? `en&tl=zh-CN&text=${query.value}` : `zh-CN&tl=en&text=${query.value}`;
+    return transQuery && window.open(`${searchUrl.value}${transQuery}`, '_blank');
+  } else if (engineName.value === 'deepl-translate') {
+    const isAllEnligsh = !isChineseContained(query.value);
+    const transQuery = isAllEnligsh ? `en/zh/${query.value}` : `zh/en/${query.value}`;
     return transQuery && window.open(`${searchUrl.value}${transQuery}`, '_blank');
   }
 
@@ -224,6 +226,9 @@ li {
     }
     &.google-translate {
       background-image: url('./assets/img/icons/google-translate-icon.svg');
+    }
+    &.deepl-translate {
+      background-image: url('./assets/img/icons/deepl-icon.svg');
     }
   }
   &--clear {
