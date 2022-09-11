@@ -10,13 +10,23 @@
     <div class="direct-search__title"></div>
     <div class="direct-search__input">
       <i class="direct-search__input--logo" :class="engineName"></i>
-      <input ref="inputRef" v-model="inputVal" type="text" @input="handleInput" @keyup.enter="handleSearch" />
+      <input
+        ref="inputRef"
+        v-model="inputVal"
+        type="text"
+        :placeholder="inputPlaceholder"
+        @input="handleInput"
+        @keyup.enter="handleSearch"
+      />
       <i v-show="inputVal" class="direct-search__input--clear ri-close-fill" @click="handleClearInput"></i>
       <button class="icon direct-search__input--btn" :disabled="searchBtnDisabled" @click="handleSearch"></button>
     </div>
     <div v-if="showModal" class="direct-search__modal">
       <div class="direct-search__modal--header">
-        <i class="ri-close-fill direct-search__modal--close" @click="toggleModal(false)"></i>
+        <div class="direct-search__modal--close" @click="toggleModal(false)">
+          <i class="ri-close-fill"></i>
+          <span>(Esc)</span>
+        </div>
         <h4 class="direct-search__modal--title">使用方法</h4>
       </div>
       <div class="direct-search__modal--content">
@@ -38,8 +48,17 @@
 </template>
 <script lang="ts" setup>
 import { ref, onMounted, computed } from 'vue';
-import { getEngineObj, getEngineSymbol, getQuery, searchEngineMap, isChineseContained } from './search';
+import {
+  getEngineObj,
+  getEngineSymbol,
+  getQuery,
+  searchEngineMap,
+  isChineseContained,
+  isMac,
+  isMobile,
+} from './search';
 const inputRef = ref<HTMLInputElement | null>(null);
+const inputPlaceholder = ref('');
 const inputVal = ref('');
 const engineName = ref('baidu');
 const searchUrl = ref('https://baidu.com/s?wd=');
@@ -94,8 +113,52 @@ const handleClearInput = () => {
 const toggleModal = (show: boolean): void => {
   showModal.value = show;
 };
+const renderInputPlaceholder = () => {
+  const isMac = /macintosh | mac os x/i.test(navigator.userAgent);
+  inputPlaceholder.value = isMac ? 'helper: ⌘ + k' : 'helper: control + k';
+};
+// 键盘事件监听 toogle帮助弹窗
+const shortCutsHelper = (isMac: boolean): void => {
+  let keys: string[] = [];
+  function checkKeyArr() {
+    if (keys.join('') === 'metak' || keys.join('') === 'controlk') {
+      showModal.value = true;
+    } else if (keys.length > 1) {
+      keys.length = 0;
+    }
+  }
+  document.addEventListener('keydown', function (event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      showModal.value = false;
+      keys.length = 0;
+      return;
+    }
+
+    if (isMac) {
+      // macos: command + k
+      if (keys.length === 0 && event.key.toLowerCase() === 'meta') {
+        keys.push(event.key.toLowerCase());
+      } else if (keys[0] === 'meta' && event.key === 'k') {
+        keys.push(event.key.toLowerCase());
+      }
+    } else {
+      // window: control + l
+      if (event.key.toLowerCase() === 'control') {
+        keys.push(event.key.toLowerCase());
+      } else if (keys[0] === 'control' && event.key === 'k') {
+        keys.push(event.key.toLowerCase());
+      }
+    }
+
+    checkKeyArr();
+  });
+};
 onMounted(() => {
   inputRef.value?.focus();
+  if (!isMobile()) {
+    renderInputPlaceholder();
+    shortCutsHelper(isMac());
+  }
 });
 </script>
 <style lang="scss" scoped>
@@ -277,6 +340,9 @@ li {
     &:focus {
       border-color: #1a52ec;
     }
+    &::placeholder {
+      color: rgb(190 190 190);
+    }
   }
 }
 
@@ -307,10 +373,16 @@ li {
     font-size: 18px;
     position: absolute;
     right: 0;
+    display: flex;
+    align-items: center;
     cursor: pointer;
     color: #b3afaf;
     &:hover {
       color: #000;
+    }
+    span {
+      font-size: 14px;
+      margin-top: -0.15em;
     }
   }
   &--title {

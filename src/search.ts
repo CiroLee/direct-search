@@ -129,3 +129,7 @@ export const getQuery = (str: string, abbr: string): string => {
 };
 
 export const isChineseContained = (str: string) => /[\u4E00-\u9FA5]+/.test(str);
+
+export const isMobile = () => /Android|webOS|iPhone|iPad/i.test(navigator.userAgent);
+
+export const isMac = () => /macintosh | mac os x/i.test(navigator.userAgent);
