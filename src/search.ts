@@ -104,7 +104,7 @@ export const searchEngineMap: ISearchEngine[] = [
     cname: 'google翻译',
     abbr: ['gf'],
     type: 'website',
-    searchUrl: 'https://translate.google.cn/?sl=',
+    searchUrl: 'https://translate.google.com/?sl=',
   },
   {
     name: 'deepl-translate',
