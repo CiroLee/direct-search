@@ -87,7 +87,7 @@ const handleInput = () => {
     searchUrl.value = engine.searchUrl;
   }
   // 获取搜索词
-  query.value = getQuery(inputVal.value, engineAbbr);
+  query.value = getQuery(inputVal.value, engine ? engineAbbr : '');
 };
 
 const handleSearch = () => {
@@ -101,7 +101,7 @@ const handleSearch = () => {
     return transQuery && window.open(`${searchUrl.value}${transQuery}`, '_blank');
   }
 
-  return query.value && window.open(`${searchUrl.value}${query.value}`, '_blank');
+  return query.value && window.open(`${searchUrl.value}${encodeURI(query.value)}`, '_blank');
 };
 
 const handleClearInput = () => {

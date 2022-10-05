@@ -28,7 +28,7 @@ export const searchEngineMap: ISearchEngine[] = [
     searchUrl: 'https://google.com/search?q=',
   },
   {
-    name: 'Being',
+    name: 'being',
     cname: '必应',
     abbr: ['be'],
     type: 'engine',
@@ -117,7 +117,7 @@ export const searchEngineMap: ISearchEngine[] = [
 
 export const getEngineSymbol = (str: string): string => {
   const firstSpacePos = str.replace(/(^\s*)/g, '').indexOf(' ');
-  return str.substring(0, firstSpacePos);
+  return firstSpacePos > -1 ? str.substring(0, firstSpacePos) : '';
 };
 
 export const getEngineObj = (abbr: string): ISearchEngine | undefined => {
@@ -125,7 +125,7 @@ export const getEngineObj = (abbr: string): ISearchEngine | undefined => {
 };
 
 export const getQuery = (str: string, abbr: string): string => {
-  return str.substring(abbr.length).trim().replace(/\s+/g, '+');
+  return str.substring(abbr.length).trim().replace(/\s+/g, ' ');
 };
 
 export const isChineseContained = (str: string) => /[\u4E00-\u9FA5]+/.test(str);
