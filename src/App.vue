@@ -33,7 +33,7 @@
         <p>[引擎标识缩写/英文全称] [搜索词]</p>
         <p>
           <span>e.g. go vue和react</span>
-          <span class="gray indent-2"> // 打开新tab, 实用google搜索 vue和react</span>
+          <span class="gray indent-2"> // 打开新tab, 使用google搜索 vue和react</span>
         </p>
         <p>已支持的搜索引擎:</p>
         <ul>
@@ -245,6 +245,7 @@ li {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% auto;
+    &.baidubaike,
     &.baidu {
       background-image: url('./assets/img/icons/baidu-icon.svg');
     }
@@ -292,6 +293,9 @@ li {
     }
     &.deepl-translate {
       background-image: url('./assets/img/icons/deepl-icon.svg');
+    }
+    &.wikipedia {
+      background-image: url('./assets/img/icons/wikipedia-icon.svg');
     }
   }
   &--clear {

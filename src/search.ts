@@ -113,6 +113,20 @@ export const searchEngineMap: ISearchEngine[] = [
     abbr: ['dl'],
     searchUrl: 'https://www.deepl.com/translator#',
   },
+  {
+    name: 'baidubaike',
+    type: 'website',
+    cname: '百度百科',
+    abbr: ['bw'],
+    searchUrl: 'https://baike.baidu.com/item/',
+  },
+  {
+    name: 'wikipedia',
+    type: 'website',
+    cname: '维基百科',
+    abbr: ['w'],
+    searchUrl: 'https://zh.wikipedia.org/wiki/',
+  },
 ];
 
 export const getEngineSymbol = (str: string): string => {
