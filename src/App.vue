@@ -56,11 +56,13 @@ import {
   isChineseContained,
   isMac,
   isMobile,
+  ITranslateEngine,
 } from './search';
 const inputRef = ref<HTMLInputElement | null>(null);
 const inputPlaceholder = ref('');
 const inputVal = ref('');
 const engineName = ref('baidu');
+const engineType = ref('');
 const searchUrl = ref('https://baidu.com/s?wd=');
 const query = ref('');
 const showModal = ref(false);
@@ -81,6 +83,8 @@ const handleInput = () => {
   const engineAbbr = getEngineSymbol(inputVal.value);
   const engine = getEngineObj(engineAbbr);
 
+  engineType.value = engine?.type || '';
+
   if (engine) {
     // 设置搜索引擎图标
     engineName.value = engine.name;
@@ -90,17 +94,23 @@ const handleInput = () => {
   query.value = getQuery(inputVal.value, engine ? engineAbbr : '');
 };
 
+const tranlateSiteMap = (engineType: string, query: string, isEn?: boolean) => {
+  const siteMap = {
+    'google-translate': isEn ? `en&tl=zh-CN&text=${query}` : `zh-CN&tl=en&text=${query}`,
+    'deepl-translate': isEn ? `en/zh/${query}` : `zh/en/${query}`,
+    'baidu-translate': isEn ? `en/zh/${query}` : `zh/en/${query}`,
+  };
+
+  return siteMap[engineType as ITranslateEngine];
+};
+
 const handleSearch = () => {
-  if (engineName.value === 'google-translate') {
+  if (engineType.value === 'translate') {
     const isAllEnligsh = !isChineseContained(query.value);
-    const transQuery = isAllEnligsh ? `en&tl=zh-CN&text=${query.value}` : `zh-CN&tl=en&text=${query.value}`;
-    return transQuery && window.open(`${searchUrl.value}${transQuery}`, '_blank');
-  } else if (engineName.value === 'deepl-translate') {
-    const isAllEnligsh = !isChineseContained(query.value);
-    const transQuery = isAllEnligsh ? `en/zh/${query.value}` : `zh/en/${query.value}`;
+    const transQuery = tranlateSiteMap(engineName.value, query.value, isAllEnligsh);
     return transQuery && window.open(`${searchUrl.value}${transQuery}`, '_blank');
   }
-
+  // 非翻译引擎
   return query.value && window.open(`${searchUrl.value}${encodeURI(query.value)}`, '_blank');
 };
 
@@ -245,6 +255,7 @@ li {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% auto;
+    &.baidu-translate,
     &.baidubaike,
     &.baidu {
       background-image: url('./assets/img/icons/baidu-icon.svg');

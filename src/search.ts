@@ -2,9 +2,11 @@ interface ISearchEngine {
   name: string;
   cname?: string;
   abbr: string[];
-  type: 'engine' | 'website' | 'video';
+  type: 'engine' | 'website' | 'video' | 'translate';
   searchUrl: string;
 }
+
+export type ITranslateEngine = 'google-translate' | 'baidu-translate' | 'deepl-translate';
 export const searchEngineMap: ISearchEngine[] = [
   {
     name: 'baidu',
@@ -103,15 +105,22 @@ export const searchEngineMap: ISearchEngine[] = [
     name: 'google-translate',
     cname: 'google翻译',
     abbr: ['gf'],
-    type: 'website',
+    type: 'translate',
     searchUrl: 'https://translate.google.com/?sl=',
   },
   {
     name: 'deepl-translate',
-    type: 'website',
+    type: 'translate',
     cname: 'deepl',
     abbr: ['dl'],
     searchUrl: 'https://www.deepl.com/translator#',
+  },
+  {
+    name: 'baidu-translate',
+    type: 'translate',
+    cname: '百度翻译',
+    abbr: ['bf'],
+    searchUrl: 'https://fanyi.baidu.com/#',
   },
   {
     name: 'baidubaike',
@@ -124,7 +133,7 @@ export const searchEngineMap: ISearchEngine[] = [
     name: 'wikipedia',
     type: 'website',
     cname: '维基百科',
-    abbr: ['w'],
+    abbr: ['wi'],
     searchUrl: 'https://zh.wikipedia.org/wiki/',
   },
 ];
