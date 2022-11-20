@@ -40,7 +40,7 @@ export const searchEngineMap: ISearchEngine[] = [
     name: 'github',
     abbr: ['gi'],
     type: 'website',
-    searchUrl: 'https://github.com/search?q=',
+    searchUrl: 'https://github.com/search?type=repositories&q=',
   },
   {
     name: 'stackoverflow',

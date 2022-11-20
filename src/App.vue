@@ -94,7 +94,7 @@ const handleInput = () => {
   query.value = getQuery(inputVal.value, engine ? engineAbbr : '');
 };
 
-const tranlateSiteMap = (engineType: string, query: string, isEn?: boolean) => {
+const translateSiteMap = (engineType: string, query: string, isEn?: boolean) => {
   const siteMap = {
     'google-translate': isEn ? `en&tl=zh-CN&text=${query}` : `zh-CN&tl=en&text=${query}`,
     'deepl-translate': isEn ? `en/zh/${query}` : `zh/en/${query}`,
@@ -106,8 +106,8 @@ const tranlateSiteMap = (engineType: string, query: string, isEn?: boolean) => {
 
 const handleSearch = () => {
   if (engineType.value === 'translate') {
-    const isAllEnligsh = !isChineseContained(query.value);
-    const transQuery = tranlateSiteMap(engineName.value, query.value, isAllEnligsh);
+    const isAllEnglish = !isChineseContained(query.value);
+    const transQuery = translateSiteMap(engineName.value, query.value, isAllEnglish);
     return transQuery && window.open(`${searchUrl.value}${transQuery}`, '_blank');
   }
   // 非翻译引擎
