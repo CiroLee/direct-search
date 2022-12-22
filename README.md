@@ -19,7 +19,7 @@ npm run build
 ```javascript
 搜索引擎/全称 搜索
 
-// e.g.    
+// e.g.
 go 前端框架  // 新开标签，使用谷歌搜索 前端框架
 
 
@@ -37,6 +37,9 @@ csdn             c | cs
 segmentfault     se | sf
 ```
 
+## Features
 
+- 支持主流搜索引擎
+- 适配深色模式。支持根据环境自动切换。手动切换，将缓存设置结果。
 
 体验地址： ([搜索直达](https://ciro.club/search/))

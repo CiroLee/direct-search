@@ -144,7 +144,7 @@ export const getEngineSymbol = (str: string): string => {
 };
 
 export const getEngineObj = (abbr: string): ISearchEngine | undefined => {
-  return searchEngineMap.find(item => item.abbr.includes(abbr) || item.name === abbr);
+  return searchEngineMap.find((item) => item.abbr.includes(abbr) || item.name === abbr);
 };
 
 export const getQuery = (str: string, abbr: string): string => {

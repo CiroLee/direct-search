@@ -1,9 +1,29 @@
 * {
   box-sizing: border-box;
+  transition: color, background-color 0.3s linear;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
+  --title-img: url('../assets/img/title-img.png');
+  --color: #333;
+  --hover-color: #1a52ec;
+  --bg-color: #f0f5ff;
+  --input-bg-color: #f5f8ff;
+  --input-focus-border-color: #1a52ec;
+  --modal-bg-color: rgb(240 245 255 / 56%);
+  --clear-color: #767575;
+  &.dark {
+    --title-img: url('../assets/img/title-img-light.png');
+    --bg-color: #1f2328;
+    --color: #dadada;
+    --hover-color: #6679ae;
+    --input-bg-color: #3d4045;
+    --input-focus-border-color: #7a8596;
+    --modal-bg-color: rgb(40 45 52 / 56%);
+    --clear-color: #787474;
+  }
+
   font-family: v-sans, sans-serif;
   font-size: 14px;
   line-height: 1.3;

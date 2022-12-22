@@ -1,9 +1,12 @@
 <template>
   <div class="direct-search">
     <div class="direct-search__header">
+      <i
+        class="direct-search__header--darkMode"
+        :class="isDark ? 'ri-moon-line' : 'ri-sun-line'"
+        @click="toggleDarkMode"></i>
       <a href="https://github.com/CiroLee/direct-search" target="_blank">
         <i class="ri-github-fill"></i>
-        <span>Github</span>
       </a>
       <i class="direct-search__header--help ri-question-fill" @click="toggleModal(true)"></i>
     </div>
@@ -16,8 +19,7 @@
         type="text"
         :placeholder="inputPlaceholder"
         @input="handleInput"
-        @keyup.enter="handleSearch"
-      />
+        @keyup.enter="handleSearch" />
       <i v-show="inputVal" class="direct-search__input--clear ri-close-fill" @click="handleClearInput"></i>
       <button class="icon direct-search__input--btn" :disabled="searchBtnDisabled" @click="handleSearch"></button>
     </div>
@@ -47,17 +49,21 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted, computed } from 'vue';
+import { computed, onMounted, ref, watchEffect } from 'vue';
+import { useDark, useEventListener } from '@src/hooks';
 import {
   getEngineObj,
   getEngineSymbol,
   getQuery,
-  searchEngineMap,
   isChineseContained,
   isMac,
   isMobile,
   ITranslateEngine,
+  searchEngineMap,
 } from './search';
+
+const localDarkKey = 'color-scheme';
+const isDark = useDark(localDarkKey);
 const inputRef = ref<HTMLInputElement | null>(null);
 const inputPlaceholder = ref('');
 const inputVal = ref('');
@@ -77,7 +83,7 @@ const sortedSearchEngineMap = computed(() =>
       return -1;
     }
     return 0;
-  })
+  }),
 );
 const handleInput = () => {
   const engineAbbr = getEngineSymbol(inputVal.value);
@@ -130,6 +136,7 @@ const renderInputPlaceholder = () => {
 // 键盘事件监听 toogle帮助弹窗
 const shortCutsHelper = (isMac: boolean): void => {
   let keys: string[] = [];
+
   function checkKeyArr() {
     if (keys.join('') === 'metak' || keys.join('') === 'controlk') {
       showModal.value = true;
@@ -137,7 +144,8 @@ const shortCutsHelper = (isMac: boolean): void => {
       keys.length = 0;
     }
   }
-  document.addEventListener('keydown', function (event: KeyboardEvent) {
+
+  useEventListener(document, 'keydown', function (event: KeyboardEvent) {
     if (event.key === 'Escape') {
       showModal.value = false;
       keys.length = 0;
@@ -163,6 +171,26 @@ const shortCutsHelper = (isMac: boolean): void => {
     checkKeyArr();
   });
 };
+// dark模式切换对应的dom副作用
+const darkModeEffect = (bool: boolean) => {
+  if (bool) {
+    document.body.classList.add('dark');
+    document.body.classList.remove('light');
+  } else {
+    document.body.classList.remove('dark');
+    document.body.classList.add('light');
+  }
+};
+// 手动修改dark
+const toggleDarkMode = () => {
+  isDark.value = !isDark.value;
+  localStorage.setItem(localDarkKey, isDark.value ? 'dark' : 'light');
+};
+
+watchEffect(() => {
+  darkModeEffect(isDark.value);
+});
+
 onMounted(() => {
   inputRef.value?.focus();
   if (!isMobile()) {
@@ -193,21 +221,25 @@ li {
   position: relative;
   flex-direction: column;
   align-items: center;
-  background-color: #f0f5ff;
+  background-color: var(--bg-color);
 }
 
 .direct-search__header {
   display: flex;
   width: 100%;
   height: 56px;
-  padding: 0 24px;
+  padding: 0 18px;
   justify-content: flex-end;
   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   font-size: 18px;
-  color: #333;
+  color: var(--color);
+  i {
+    font-size: 22px;
+    margin: 0 12px;
+  }
   a {
     position: relative;
     text-decoration: unset;
@@ -216,28 +248,23 @@ li {
     height: 100%;
     font-size: 16px;
     color: inherit;
-    i {
-      font-size: 16px;
-      margin-top: 2px;
-      margin-right: 4px;
-    }
   }
+  &--darkMode,
   &--help {
-    margin-left: 12px;
     cursor: pointer;
   }
+  &--darkMode:hover,
   &--help:hover,
   a:hover {
-    color: #1a52ec;
+    color: var(--hover-color);
   }
 }
 
 .direct-search__title {
   width: 220px;
   height: 70px;
-  margin: 0 auto;
-  margin-top: max(140px, 14%);
-  background: url('./assets/img/title-img.png') center no-repeat;
+  margin: max(140px, 14%) auto 0;
+  background: var(--title-img) center no-repeat;
   background-size: 100% auto;
 }
 
@@ -316,7 +343,7 @@ li {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #5d5d5d;
+    color: var(--clear-color);
   }
   &--btn {
     outline: 0;
@@ -350,10 +377,10 @@ li {
     transition: all 0.25s ease;
     padding: 0 56px;
     font-size: 16px;
-    color: rgb(0 0 0 / 80%);
-    background-color: #f5f8ff;
+    background-color: var(--input-bg-color);
+    color: var(--color);
     &:focus {
-      border-color: #1a52ec;
+      border-color: var(--input-focus-border-color);
     }
     &::placeholder {
       color: rgb(190 190 190);
@@ -374,12 +401,13 @@ li {
   top: 50%;
   left: 50%;
   padding: 24px 32px;
-  background-color: rgb(240 245 255 / 80%);
+  background-color: var(--modal-bg-color);
   backdrop-filter: blur(4px);
   border-radius: 6px;
   border: 1px solid rgb(1 23 66 / 10%);
   transform: translate(-50%, -50%);
   z-index: 100;
+  color: var(--color);
   &--header {
     position: absolute;
     width: calc(100% - 64px);
@@ -391,10 +419,7 @@ li {
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: #b3afaf;
-    &:hover {
-      color: #000;
-    }
+    color: var(--color);
     span {
       font-size: 14px;
       margin-top: -0.15em;
@@ -411,10 +436,12 @@ li {
     ul,
     p {
       margin-top: 8px;
+      color: var(--color);
     }
     li {
       padding: 0 24px 0 12px;
       display: flex;
+      color: var(--color);
       span:nth-of-type(1) {
         flex: 2;
       }
