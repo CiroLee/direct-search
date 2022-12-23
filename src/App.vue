@@ -51,6 +51,7 @@
 <script lang="ts" setup>
 import { computed, onMounted, ref, watchEffect } from 'vue';
 import { useDark, useEventListener } from '@src/hooks';
+import { Storage } from 'mew-utils';
 import {
   getEngineObj,
   getEngineSymbol,
@@ -133,7 +134,7 @@ const renderInputPlaceholder = () => {
   const isMac = /macintosh | mac os x/i.test(navigator.userAgent);
   inputPlaceholder.value = isMac ? 'helper: ⌘ + k' : 'helper: control + k';
 };
-// 键盘事件监听 toogle帮助弹窗
+// 键盘事件监听 toggle帮助弹窗
 const shortCutsHelper = (isMac: boolean): void => {
   let keys: string[] = [];
 
@@ -145,8 +146,9 @@ const shortCutsHelper = (isMac: boolean): void => {
     }
   }
 
-  useEventListener(document, 'keydown', function (event: KeyboardEvent) {
-    if (event.key === 'Escape') {
+  useEventListener(document, 'keydown', function (event: KeyboardEvent | Event) {
+    const eventKey = (event as KeyboardEvent).key;
+    if (eventKey === 'Escape') {
       showModal.value = false;
       keys.length = 0;
       return;
@@ -154,17 +156,17 @@ const shortCutsHelper = (isMac: boolean): void => {
 
     if (isMac) {
       // macos: command + k
-      if (keys.length === 0 && event.key.toLowerCase() === 'meta') {
-        keys.push(event.key.toLowerCase());
-      } else if (keys[0] === 'meta' && event.key === 'k') {
-        keys.push(event.key.toLowerCase());
+      if (keys.length === 0 && eventKey.toLowerCase() === 'meta') {
+        keys.push(eventKey.toLowerCase());
+      } else if (keys[0] === 'meta' && eventKey === 'k') {
+        keys.push(eventKey.toLowerCase());
       }
     } else {
       // window: control + l
-      if (event.key.toLowerCase() === 'control') {
-        keys.push(event.key.toLowerCase());
-      } else if (keys[0] === 'control' && event.key === 'k') {
-        keys.push(event.key.toLowerCase());
+      if (eventKey.toLowerCase() === 'control') {
+        keys.push(eventKey.toLowerCase());
+      } else if (keys[0] === 'control' && eventKey === 'k') {
+        keys.push(eventKey.toLowerCase());
       }
     }
 
@@ -184,7 +186,7 @@ const darkModeEffect = (bool: boolean) => {
 // 手动修改dark
 const toggleDarkMode = () => {
   isDark.value = !isDark.value;
-  localStorage.setItem(localDarkKey, isDark.value ? 'dark' : 'light');
+  Storage.set(localDarkKey, isDark.value ? 'dark' : 'light', 12);
 };
 
 watchEffect(() => {

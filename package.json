@@ -20,6 +20,7 @@
     ]
   },
   "dependencies": {
+    "mew-utils": "^0.0.8",
     "remixicon": "^2.5.0",
     "reset-css": "^5.0.1",
     "vfonts": "^0.0.3",
