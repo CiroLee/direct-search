@@ -37,6 +37,13 @@ export const searchEngineMap: ISearchEngine[] = [
     searchUrl: 'https://www.bing.com/search?q=',
   },
   {
+    name: 'fsou',
+    cname: 'f搜',
+    type: 'engine',
+    abbr: ['fsou', 'f'],
+    searchUrl: 'https://fsoufsou.com/search?q=',
+  },
+  {
     name: 'github',
     abbr: ['gi'],
     type: 'website',

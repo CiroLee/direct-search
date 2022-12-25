@@ -34,8 +34,8 @@
       <div class="direct-search__modal--content">
         <p>[引擎标识缩写/英文全称] [搜索词]</p>
         <p>
-          <span>e.g. go vue和react</span>
-          <span class="gray indent-2"> // 打开新tab, 使用google搜索 vue和react</span>
+          <span>e.g. go koa</span>
+          <span class="gray indent-2"> // 打开新tab, 使用google搜索 koa</span>
         </p>
         <p>已支持的搜索引擎:</p>
         <ul>
@@ -68,7 +68,7 @@ const isDark = useDark(localDarkKey);
 const inputRef = ref<HTMLInputElement | null>(null);
 const inputPlaceholder = ref('');
 const inputVal = ref('');
-const engineName = ref('baidu');
+const engineName = ref('baidukaifa');
 const engineType = ref('');
 const searchUrl = ref('https://baidu.com/s?wd=');
 const query = ref('');
@@ -336,6 +336,9 @@ li {
     }
     &.wikipedia {
       background-image: url('./assets/img/icons/wikipedia-icon.svg');
+    }
+    &.fsou {
+      background-image: url('./assets/img/icons/f-sou.svg');
     }
   }
   &--clear {
