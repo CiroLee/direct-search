@@ -13,6 +13,8 @@ body {
   --input-focus-border-color: #1a52ec;
   --modal-bg-color: rgb(240 245 255 / 56%);
   --clear-color: #767575;
+  --scrollbar-thumb-color: #d1d1d1;
+  --scrollbar-thumb-hover-color: #7f7f7f;
   &.dark {
     --title-img: url('../assets/img/title-img-light.png');
     --bg-color: #1f2328;
@@ -22,6 +24,8 @@ body {
     --input-focus-border-color: #7a8596;
     --modal-bg-color: rgb(40 45 52 / 56%);
     --clear-color: #787474;
+    --scrollbar-thumb-color: #7f7f7f;
+    --scrollbar-thumb-hover-color: #d1d1d1;
   }
 
   font-family: v-sans, sans-serif;

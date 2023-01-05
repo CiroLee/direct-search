@@ -184,7 +184,7 @@ li {
 }
 
 .direct-search {
-  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   position: relative;
   flex-direction: column;

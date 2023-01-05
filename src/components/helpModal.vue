@@ -3,7 +3,7 @@
     <div class="direct-search__modal--header">
       <div class="direct-search__modal--close" @click="handleClose">
         <i class="ri-close-fill"></i>
-        <span>(Esc)</span>
+        <span v-if="!isMobile()">(Esc)</span>
       </div>
       <h4 class="direct-search__modal--title">使用方法</h4>
     </div>
@@ -24,8 +24,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { searchEngineMap } from '../search';
+import { computed, onBeforeUnmount, onMounted } from 'vue';
+import { isMobile, searchEngineMap } from '../search';
+
 const sortedSearchEngineMap = computed(() =>
   searchEngineMap.sort((a, b) => {
     const aVal = a.name.toLowerCase();
@@ -42,6 +43,14 @@ const emits = defineEmits(['close']);
 const handleClose = () => {
   emits('close');
 };
+
+onMounted(() => {
+  document.body.style.overflow = 'hidden';
+});
+
+onBeforeUnmount(() => {
+  document.body.removeAttribute('style');
+});
 </script>
 <style lang="scss" scoped>
 .direct-search__modal {
@@ -83,13 +92,26 @@ const handleClose = () => {
     color: #333;
     max-height: 60vh;
     overflow: auto;
+    &::-webkit-scrollbar {
+      width: 6px;
+      border-radius: 6px;
+      background: rgb(238 238 238 / 15.6%);
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      height: 40px;
+      background: var(--scrollbar-thumb-color);
+      &:hover {
+        background: var(--scrollbar-thumb-hover-color);
+      }
+    }
     ul,
     p {
       margin-top: 8px;
       color: var(--color);
     }
     li {
-      padding: 0 24px 0 12px;
+      padding: 6px 24px 6px 12px;
       display: flex;
       color: var(--color);
       span:nth-of-type(1) {
