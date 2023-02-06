@@ -48,7 +48,7 @@ const inputPlaceholder = ref('');
 const inputVal = ref('');
 const engineName = ref('baidukaifa');
 const engineType = ref('');
-const searchUrl = ref('https://baidu.com/s?wd=');
+const searchUrl = ref('https://kaifa.baidu.com/searchPage?wd=');
 const query = ref('');
 const showModal = ref(false);
 const searchBtnDisabled = computed(() => !query.value.length);
