@@ -184,7 +184,7 @@ li {
 }
 
 .direct-search {
-  height: 100dvh;
+  height: 100vh;
   overflow: hidden;
   position: relative;
   flex-direction: column;
@@ -362,6 +362,13 @@ li {
 @media screen and (max-width: 414px) {
   .direct-search__input {
     width: 86%;
+  }
+}
+
+/* safari use dvh */
+@supports (-webkit-touch-callout: none) {
+  .direct-search {
+    height: 100dvh;
   }
 }
 
