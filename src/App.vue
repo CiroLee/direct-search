@@ -5,6 +5,9 @@
         class="direct-search__header--darkMode"
         :class="isDark ? 'ri-moon-line' : 'ri-sun-line'"
         @click="toggleDarkMode"></i>
+      <a href="https://github.com/CiroLee/direct-search-terminal" target="_blank">
+        <span class="relative">ds in terminal</span>
+      </a>
       <a href="https://github.com/CiroLee/direct-search" target="_blank">
         <i class="ri-github-fill"></i>
       </a>
@@ -216,6 +219,19 @@ li {
     height: 100%;
     font-size: 16px;
     color: inherit;
+  }
+  a span.relative {
+    position: relative;
+    &::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+      background-color: #f73c3c;
+      top: -1px;
+      right: -6px;
+      position: absolute;
+    }
   }
   &--darkMode,
   &--help {
