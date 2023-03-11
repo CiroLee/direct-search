@@ -143,6 +143,13 @@ export const searchEngineMap: ISearchEngine[] = [
     abbr: ['wi'],
     searchUrl: 'https://zh.wikipedia.org/wiki/',
   },
+  {
+    name: 'mdn',
+    type: 'website',
+    cname: 'MDN Web Docs',
+    abbr: ['mdn'],
+    searchUrl: 'https://developer.mozilla.org/zh-CN/search?q=',
+  },
 ];
 
 export const getEngineSymbol = (str: string): string => {

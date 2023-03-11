@@ -222,16 +222,6 @@ li {
   }
   a span.relative {
     position: relative;
-    &::after {
-      content: '';
-      width: 10px;
-      height: 10px;
-      border-radius: 10px;
-      background-color: #f73c3c;
-      top: -1px;
-      right: -6px;
-      position: absolute;
-    }
   }
   &--darkMode,
   &--help {
@@ -321,6 +311,9 @@ li {
     }
     &.fsou {
       background-image: url('./assets/img/icons/f-sou.svg');
+    }
+    &.mdn {
+      background-image: url('./assets/img/icons/mdn-icon.svg');
     }
   }
   &--clear {
