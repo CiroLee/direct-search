@@ -21,7 +21,7 @@ npm run build
 # 使用
 
 ```javascript
-搜索引擎/全称 搜索
+搜索引擎简称(或全称) + 搜索词
 
 // e.g.
 go 前端框架  // 新开标签，使用谷歌搜索 前端框架
@@ -46,6 +46,7 @@ go 前端框架  // 新开标签，使用谷歌搜索 前端框架
 | go        | google(谷歌)                  |
 | gf        | google-translate(google 翻译) |
 | j \| jue  | juejin(掘金)                  |
+| mdn       | mdn(MDN Web Docs)             |
 | n         | npm                           |
 | se \| sf  | segmentfault(思否)            |
 | st        | stackoverflow                 |
