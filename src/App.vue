@@ -101,7 +101,7 @@ const toggleModal = (show: boolean): void => {
 };
 const renderInputPlaceholder = () => {
   const isMac = /macintosh | mac os x/i.test(navigator.userAgent);
-  inputPlaceholder.value = isMac ? 'helper: ⌘ + k' : 'helper: control + k';
+  inputPlaceholder.value = isMac ? '帮助: ⌘ + K' : '帮助: Ctrl + K';
 };
 // 键盘事件监听 toggle帮助弹窗
 const shortCutsHelper = (isMac: boolean): void => {
@@ -368,7 +368,7 @@ li {
   }
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (width <= 414px) {
   .direct-search__input {
     width: 86%;
   }
